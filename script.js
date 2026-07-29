@@ -5,7 +5,7 @@ const lines = [
   'print(manohari.currently_building())',
   '> "Cloud-Based AI Smart Printing System"',
   'print(manohari.stack())',
-  '> ["Python", "ML", "SQL", "Docker"]'
+  '> ["Python", "ML", "SQL", "Java"]'
 ];
 
 async function typeLoop() {
