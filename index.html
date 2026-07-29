@@ -1,87 +1,263 @@
-// ---------- Typing effect ----------
-const typedEl = document.getElementById('typed');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const lines = [
-  'print(manohari.currently_building())',
-  '> "Cloud-Based AI Smart Printing System"',
-  'print(manohari.stack())',
-  '> ["Python", "ML", "SQL", "Docker"]'
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manohari M | AI &amp; Data Science Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-async function typeLoop() {
-  if (!typedEl) return;
-  if (prefersReducedMotion) {
-    typedEl.textContent = lines[0];
-    return;
-  }
-  let lineIndex = 0;
-  while (true) {
-    const line = lines[lineIndex];
-    for (let i = 0; i <= line.length; i++) {
-      typedEl.textContent = line.slice(0, i);
-      await sleep(22);
-    }
-    await sleep(1400);
-    for (let i = line.length; i >= 0; i--) {
-      typedEl.textContent = line.slice(0, i);
-      await sleep(12);
-    }
-    await sleep(300);
-    lineIndex = (lineIndex + 1) % lines.length;
-  }
-}
+<header>
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">MM<span class="dot">.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+<main id="top">
 
-typeLoop();
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">AI &amp; Data Science &middot; SJCIT, Chikkaballapura</p>
+        <h1>Manohari M</h1>
+        <p class="role">Building AI-driven solutions, one model at a time.</p>
+        <p class="terminal" aria-hidden="true">
+          <span class="prompt">&gt;&gt;&gt;</span>
+          <span id="typed"></span><span class="cursor">&#9608;</span>
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="Manohari_M_Resume.docx" class="btn btn-ghost" download>Download Resume</a>
+        </div>
+      </div>
+      <div class="hero-graphic" aria-hidden="true">
+        <svg viewBox="0 0 360 360" width="100%" height="100%">
+          <g id="node-graph" stroke="#4A55E0" stroke-opacity="0.35" fill="none"></g>
+        </svg>
+      </div>
+    </div>
+  </section>
 
-// ---------- Node graph background ----------
-(function buildNodeGraph() {
-  const g = document.getElementById('node-graph');
-  if (!g) return;
+  <section id="about" class="section">
+    <div class="wrap about-grid">
+      <div>
+        <p class="section-label">01 &mdash; About</p>
+        <h2>Currently training on real problems.</h2>
+        <p class="body-text">
+          I'm an Artificial Intelligence and Data Science undergraduate with a strong foundation in Python,
+          Java, SQL, Machine Learning, and software development. I enjoy taking a dataset from raw and messy
+          to clean and predictive &mdash; and packaging that model into something people can actually use.
+          Quick learner, steady problem-solver, and always looking for the next tool worth picking up.
+        </p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-row">
+          <span class="stat-label">Degree</span>
+          <span class="stat-value">B.E. in AI &amp; Data Science</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Institute</span>
+          <span class="stat-value">SJC Institute of Technology</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">CGPA</span>
+          <span class="stat-value">8.98 / 10</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Graduating</span>
+          <span class="stat-value">2027</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Based in</span>
+          <span class="stat-value">Bengaluru Rural, Karnataka</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  const NS = 'http://www.w3.org/2000/svg';
-  const nodeCount = 14;
-  const width = 360, height = 360;
-  const points = [];
+  <section id="skills" class="section alt">
+    <div class="wrap">
+      <p class="section-label">02 &mdash; Skills</p>
+      <h2>What I build with.</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <div class="tags">
+            <span>Python</span><span>Java</span><span>SQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Libraries &amp; Frameworks</h3>
+          <div class="tags">
+            <span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>Matplotlib</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>AI &amp; Data Science</h3>
+          <div class="tags">
+            <span>Machine Learning</span><span>Predictive Modeling</span><span>NLP</span><span>Data Visualization</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools &amp; Platforms</h3>
+          <div class="tags">
+            <span>VS Code</span><span>Git</span><span>GitHub</span><span>Docker</span><span>Power BI</span><span>Tableau</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Core Concepts</h3>
+          <div class="tags">
+            <span>DSA</span><span>DBMS</span><span>Statistics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  for (let i = 0; i < nodeCount; i++) {
-    points.push({
-      x: 30 + Math.random() * (width - 60),
-      y: 30 + Math.random() * (height - 60),
-    });
-  }
+  <section id="projects" class="section">
+    <div class="wrap">
+      <p class="section-label">03 &mdash; Projects</p>
+      <h2>Things I've shipped and things I'm shipping.</h2>
 
-  // connect each node to its 2 nearest neighbors
-  points.forEach((p, i) => {
-    const distances = points
-      .map((q, j) => ({ j, d: Math.hypot(p.x - q.x, p.y - q.y) }))
-      .filter((e) => e.j !== i)
-      .sort((a, b) => a.d - b.d)
-      .slice(0, 2);
+      <div class="project-list">
 
-    distances.forEach(({ j }) => {
-      const q = points[j];
-      const line = document.createElementNS(NS, 'line');
-      line.setAttribute('x1', p.x);
-      line.setAttribute('y1', p.y);
-      line.setAttribute('x2', q.x);
-      line.setAttribute('y2', q.y);
-      line.setAttribute('stroke-width', '1');
-      g.appendChild(line);
-    });
-  });
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Cloud-Based AI Smart Printing System</h3>
+            <span class="status status-ongoing">Ongoing &middot; Major Project</span>
+          </div>
+          <p>
+            A secure cloud printing platform with document upload, live preview, automatic page counting,
+            and dynamic print-cost calculation. Building real-time job tracking, UPI payment integration,
+            intelligent printer scheduling, and AI-based color-page detection.
+          </p>
+          <div class="tags">
+            <span>Cloud</span><span>AI</span><span>Payments</span><span>Scheduling</span>
+          </div>
+        </article>
 
-  points.forEach((p, i) => {
-    const circle = document.createElementNS(NS, 'circle');
-    circle.setAttribute('cx', p.x);
-    circle.setAttribute('cy', p.y);
-    circle.setAttribute('r', i % 5 === 0 ? 5 : 3);
-    circle.setAttribute('fill', i % 5 === 0 ? '#4A55E0' : '#E8A33D');
-    circle.setAttribute('fill-opacity', i % 5 === 0 ? '0.9' : '0.7');
-    circle.setAttribute('stroke', 'none');
-    g.appendChild(circle);
-  });
-})();
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Heart Disease Prediction System</h3>
+            <span class="status status-done">Completed</span>
+          </div>
+          <p>
+            Compared Logistic Regression, SVM, and Random Forest models on the Framingham dataset for
+            heart disease risk prediction. Handled data cleaning, normalization, and feature engineering,
+            then built an interface for real-time risk assessment.
+          </p>
+          <div class="tags">
+            <span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>NumPy</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Online Leave Management System</h3>
+            <span class="status status-done">Completed</span>
+          </div>
+          <p>
+            A web-based application to manage leave requests and approvals, with database-backed workflow
+            automation for faster, more transparent processing.
+          </p>
+          <div class="tags">
+            <span>PHP</span><span>MySQL</span><span>Web Development</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="section alt">
+    <div class="wrap">
+      <p class="section-label">04 &mdash; Experience</p>
+      <h2>Where I've worked.</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-date">Jun 2026 &ndash; Jul 2026</span>
+          </div>
+          <div class="timeline-body">
+            <h3>DevOps Intern, CodeAlpha <span class="remote">(Remote)</span></h3>
+            <ul>
+              <li>Developed a Java application using Gradle for automated builds and dependency management.</li>
+              <li>Containerized and deployed a custom web server using Docker; managed source control with Git/GitHub.</li>
+              <li>Earned a Completion Certificate and Letter of Recommendation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3 class="mini-heading">Certifications</h3>
+          <ul class="plain-list">
+            <li><span>Introduction to Modern AI</span><span class="issuer">Cisco Networking Academy, 2026</span></li>
+            <li><span>Introduction to Data Science</span><span class="issuer">Cisco Networking Academy, 2026</span></li>
+            <li><span>Data Analytics Essentials</span><span class="issuer">Cisco Networking Academy, 2026</span></li>
+            <li><span>NLP Fundamentals</span><span class="issuer">Infosys Springboard, 2026</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini-heading">Achievements</h3>
+          <ul class="plain-list">
+            <li><span>Runner-up, Hack Hive '25</span><span class="issuer">C Byre Gowda Institute of Technology, Kolar &middot; Apr 2025</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section">
+    <div class="wrap">
+      <p class="section-label">05 &mdash; Contact</p>
+      <h2>Let's build something.</h2>
+      <p class="body-text">
+        Open to internships, collaborations, and anything AI &amp; data-driven.
+      </p>
+      <div class="contact-grid">
+        <a href="mailto:manoharimb5@gmail.com" class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">manoharimb5@gmail.com</span>
+        </a>
+        <a href="tel:+918317454526" class="contact-item">
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+91 83174 54526</span>
+        </a>
+        <a href="https://www.linkedin.com/in/manoharim" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">linkedin.com/in/manoharim</span>
+        </a>
+        <a href="https://github.com/manohari268" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">github.com/manohari268</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>&copy; 2026 Manohari M</span>
+    <span class="footer-tag">print("Built with Python-brained curiosity.")</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
