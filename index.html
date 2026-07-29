@@ -1,89 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manohari M | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// ---------- Typing effect ----------
+const typedEl = document.getElementById('typed');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lines = [
+  'print(manohari.currently_building())',
+  '> "Cloud-Based AI Smart Printing System"',
+  'print(manohari.stack())',
+  '> ["Python", "ML", "SQL", "Docker"]'
+];
 
-<header>
-    <h2>Manohari M</h2>
-    <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+async function typeLoop() {
+  if (!typedEl) return;
+  if (prefersReducedMotion) {
+    typedEl.textContent = lines[0];
+    return;
+  }
+  let lineIndex = 0;
+  while (true) {
+    const line = lines[lineIndex];
+    for (let i = 0; i <= line.length; i++) {
+      typedEl.textContent = line.slice(0, i);
+      await sleep(22);
+    }
+    await sleep(1400);
+    for (let i = line.length; i >= 0; i--) {
+      typedEl.textContent = line.slice(0, i);
+      await sleep(12);
+    }
+    await sleep(300);
+    lineIndex = (lineIndex + 1) % lines.length;
+  }
+}
 
-<section class="hero">
-    <h1>Hi, I'm Manohari 👋</h1>
-    <p>AI & Data Science Engineering Student</p>
-    <a href="#projects" class="btn">View Projects</a>
-</section>
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>
-        Enthusiastic engineering student with strong interest in Artificial Intelligence,
-        Machine Learning, and Data Science. Skilled in Python, SQL, and Web Development.
-        Passionate about building real-world applications and solving problems.
-    </p>
-</section>
+typeLoop();
 
-<section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-container">
-        <div>Python</div>
-        <div>Java</div>
-        <div>C</div>
-        <div>Machine Learning</div>
-        <div>Data Analysis</div>
-        <div>MySQL</div>
-        <div>HTML</div>
-        <div>CSS</div>
-        <div>JavaScript</div>
-        <div>AWS</div>
-        <div>GitHub</div>
-    </div>
-</section>
+// ---------- Node graph background ----------
+(function buildNodeGraph() {
+  const g = document.getElementById('node-graph');
+  if (!g) return;
 
-<section id="projects">
-    <h2>Projects</h2>
+  const NS = 'http://www.w3.org/2000/svg';
+  const nodeCount = 14;
+  const width = 360, height = 360;
+  const points = [];
 
-    <div class="project-card">
-        <h3>Online Leave Management System</h3>
-        <p>
-            Developed a web-based application using PHP and MySQL to manage leave requests and approvals.
-            Implemented database operations and streamlined workflow automation.
-        </p>
-    </div>
+  for (let i = 0; i < nodeCount; i++) {
+    points.push({
+      x: 30 + Math.random() * (width - 60),
+      y: 30 + Math.random() * (height - 60),
+    });
+  }
 
-    <div class="project-card">
-        <h3>Heart Disease Prediction System</h3>
-        <p>
-            Built a machine learning model using Logistic Regression, SVM, and Random Forest.
-            Performed data preprocessing and evaluated model performance.
-        </p>
-    </div>
+  // connect each node to its 2 nearest neighbors
+  points.forEach((p, i) => {
+    const distances = points
+      .map((q, j) => ({ j, d: Math.hypot(p.x - q.x, p.y - q.y) }))
+      .filter((e) => e.j !== i)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 2);
 
-</section>
+    distances.forEach(({ j }) => {
+      const q = points[j];
+      const line = document.createElementNS(NS, 'line');
+      line.setAttribute('x1', p.x);
+      line.setAttribute('y1', p.y);
+      line.setAttribute('x2', q.x);
+      line.setAttribute('y2', q.y);
+      line.setAttribute('stroke-width', '1');
+      g.appendChild(line);
+    });
+  });
 
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Email: manoharimb5@gmail.com</p>
-    <p>Phone: +91 8317454526</p>
-    <p>
-        <a href="https://linkedin.com/in/manoharim" target="_blank">LinkedIn</a>
-    </p>
-</section>
-
-<footer>
-    <p>© 2026 Manohari M</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+  points.forEach((p, i) => {
+    const circle = document.createElementNS(NS, 'circle');
+    circle.setAttribute('cx', p.x);
+    circle.setAttribute('cy', p.y);
+    circle.setAttribute('r', i % 5 === 0 ? 5 : 3);
+    circle.setAttribute('fill', i % 5 === 0 ? '#4A55E0' : '#E8A33D');
+    circle.setAttribute('fill-opacity', i % 5 === 0 ? '0.9' : '0.7');
+    circle.setAttribute('stroke', 'none');
+    g.appendChild(circle);
+  });
+})();
